@@ -1,9 +1,10 @@
 import './App.css';
+import Body from './Components/Body';
+
 function App() {
   return (
     <div className="App">
-      <p className="text-3xl font-bold text-green-800">yash mahan hai</p>
-
+      <Body/>
     </div>
   );
 }
