@@ -21,7 +21,7 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div className="absolute">
+      <div className="absolute object-cover">
         <img src={banner} alt="" />
       </div>
       <form onSubmit={(e)=>e.preventDefault()} className="absolute p-12 bg-black/75 w-3/12 my-36 mx-auto right-0 left-0 text-white rounded-lg ">
