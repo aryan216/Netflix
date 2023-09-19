@@ -3,15 +3,50 @@ import Header from "./Header";
 import banner from "../assets/banner.jpg" 
 import { validateForm } from "../Utils/validate";
 import { useState,useRef } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Utils/firebase";
 const Login = () => {
   const [isSignInForm,setIsSignInForm]=useState(true);
   const [errorMessage,setErrorMessage]=useState(null);
   const email=useRef(null);
   const password=useRef(null);
-  console.log(email)
+  
   const handleFormValidation=()=>{
     const message=validateForm(email.current.value,password.current.value);
     setErrorMessage(message);
+    if(message)return;
+
+    if(!isSignInForm){
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // console.log(user)
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrorMessage(errorCode+errorMessage);
+    // ..
+  });
+    }
+    else{
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user)
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrorMessage(errorCode+errorMessage);
+  });
+
+    }
     
   }
    
