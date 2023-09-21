@@ -1,10 +1,13 @@
 import './App.css';
 import Body from './Components/Body';
+import { Provider } from 'react-redux';
+import appStore from './Utils/AppStore';
+import { startTransition } from 'react';
 
 function App() {
   return (
     <div className="App">
-      <Body/>
+      <Provider store={appStore}><Body/></Provider>
     </div>
   );
 }
